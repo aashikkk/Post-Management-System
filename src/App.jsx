@@ -1,9 +1,14 @@
-import "./App.css";
+import "./index.css";
+import { AddTask } from "./components/AddTask";
+import { Navbar } from "./components/Navbar";
+import PostList from "./components/PostList";
 
 function App() {
     return (
         <>
-            <h1 className="text-3xl font-bold underline">Hello world!</h1>
+            <Navbar />
+            <AddTask />
+            <PostList />
         </>
     );
 }
