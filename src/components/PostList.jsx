@@ -1,9 +1,13 @@
 import Table from "react-bootstrap/Table";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import UpdatePostModel from "./UpdatePost";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedPost, removePostFromList } from "../slices/postsSlice";
+import {
+    setSelectedPost,
+    removePostFromList,
+    getPostsFromServer,
+} from "../slices/postsSlice";
 
 const PostList = () => {
     const [modalShow, setModalShow] = useState(false);
@@ -15,6 +19,10 @@ const PostList = () => {
         setModalShow(true);
         dispatch(setSelectedPost(post));
     };
+    useEffect(() => {
+        dispatch(getPostsFromServer());
+    }, [dispatch]);
+
     const handleDelete = (post) => {
         console.log("Delete Task");
         dispatch(removePostFromList(post));

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { addPostToList } from "../slices/postsSlice";
+import { addPostToServer } from "../slices/postsSlice";
 import { useDispatch } from "react-redux";
 
-export const AddTask = () => {
+export const AddPost = () => {
     const dispatch = useDispatch();
 
     const [values, setValues] = useState({
@@ -16,7 +16,7 @@ export const AddTask = () => {
         e.preventDefault();
         console.log({ title: values.title, description: values.description });
         dispatch(
-            addPostToList({
+            addPostToServer({
                 title: values.title,
                 description: values.description,
             })
