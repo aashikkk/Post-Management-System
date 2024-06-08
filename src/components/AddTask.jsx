@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { addPostToList } from "../slices/postsSlice";
+import { useDispatch } from "react-redux";
 
 export const AddTask = () => {
+    const dispatch = useDispatch();
+
     const [values, setValues] = useState({
         title: "",
         description: "",
@@ -11,6 +15,13 @@ export const AddTask = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log({ title: values.title, description: values.description });
+        dispatch(
+            addPostToList({
+                title: values.title,
+                description: values.description,
+            })
+        );
+        setValues({ title: "", description: "" });
     };
 
     const handleChange = (e) => {

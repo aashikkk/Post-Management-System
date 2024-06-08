@@ -6,3 +6,5 @@ export default configureStore({
         posts: postReducer,
     },
 });
+
+// posts - key of reducer, this will be use for useSelector.

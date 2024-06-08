@@ -10,7 +10,7 @@ const postsSlice = createSlice({
     initialState,
     reducers: {
         addPostToList: (state, action) => {
-            const id = Math.random * 100;
+            const id = Math.random() * 100;
             let post = { ...action.payload, id };
             state.postsList.push(post);
         },
@@ -24,13 +24,17 @@ const postsSlice = createSlice({
                 post.id === action.payload.id ? action.payload : post
             );
         },
-        selectedPost: (state, action) => {
+        setSelectedPost: (state, action) => {
             state.selectedPost = action.payload;
         },
     },
 });
 
-export const { addPostToList, removePostFromList, updatePostInList, selectedPost } = postsSlice.actions;
+export const {
+    addPostToList,
+    removePostFromList,
+    updatePostInList,
+    setSelectedPost,
+} = postsSlice.actions;
 
 export default postsSlice.reducer;
-
