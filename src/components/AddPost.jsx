@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import { addPostToList } from "../slices/postsSlice";
 import { useDispatch } from "react-redux";
 
-export const AddTask = () => {
+export const AddPost = () => {
     const dispatch = useDispatch();
 
     const [values, setValues] = useState({
