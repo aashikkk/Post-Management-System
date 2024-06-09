@@ -8,7 +8,7 @@ Currently, two official plugins are available:
 -   [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 # Post Management System
-This version done by using Redux with json-server for data persistence
+*This version done by using Redux with json-server for data persistence*
 
 Install json-server as well if you haven't already as global
 
