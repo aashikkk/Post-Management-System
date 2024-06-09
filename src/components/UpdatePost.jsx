@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePostInList } from "../slices/postsSlice";
+import { updatePostInServer } from "../slices/postsSlice";
 
 const UpdatePostModel = (props) => {
     const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const UpdatePostModel = (props) => {
         props.onHide();
         // e.preventDefault();
         console.log({ title: values.title, description: values.description });
-        dispatch(updatePostInList(values));
+        dispatch(updatePostInServer(values));
     };
 
     const handleChange = (e) => {

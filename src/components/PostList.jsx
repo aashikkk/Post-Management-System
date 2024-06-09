@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     setSelectedPost,
     removePostFromList,
+    deletePostFromServer,
     getPostsFromServer,
 } from "../slices/postsSlice";
 
@@ -25,7 +26,11 @@ const PostList = () => {
 
     const handleDelete = (post) => {
         console.log("Delete Task");
-        dispatch(removePostFromList(post));
+        dispatch(deletePostFromServer(post))
+            .unwrap()
+            .then(() => {
+                dispatch(removePostFromList(post));
+            });
     };
 
     return (

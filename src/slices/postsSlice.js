@@ -44,25 +44,62 @@ export const addPostToServer = createAsyncThunk(
     }
 );
 
+//PATCH
+export const updatePostInServer = createAsyncThunk(
+    "posts/updatePostInServer",
+    async (post, { rejectWithValue }) => {
+        const options = {
+            method: "PATCH",
+            body: JSON.stringify(post),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+            },
+        };
+        const response = await fetch(BASE_URL + "/" + post.id, options);
+        if (response.ok) {
+            const jsonResponse = await response.json();
+            return jsonResponse;
+        } else {
+            return rejectWithValue({ error: "Task Not Updated" });
+        }
+    }
+);
+
+//DELETE
+export const deletePostFromServer = createAsyncThunk(
+    "posts/deletePostFromServer",
+    async (post, { rejectWithValue }) => {
+        const options = {
+            method: "DELETE",
+        };
+        const response = await fetch(BASE_URL + "/" + post.id, options);
+        if (response.ok) {
+            const jsonResponse = await response.json();
+            return jsonResponse;
+        } else {
+            return rejectWithValue({ error: "Post Not Deleted" });
+        }
+    }
+);
 const postsSlice = createSlice({
     name: "postsSlice",
     initialState,
     reducers: {
-        addPostToList: (state, action) => {
-            const id = Math.random() * 100;
-            let post = { ...action.payload, id };
-            state.postsList.push(post);
-        },
+        // addPostToList: (state, action) => {
+        //     const id = Math.random() * 100;
+        //     let post = { ...action.payload, id };
+        //     state.postsList.push(post);
+        // },
         removePostFromList: (state, action) => {
             state.postsList = state.postsList.filter(
                 (post) => post.id !== action.payload.id
             );
         },
-        updatePostInList: (state, action) => {
-            state.postsList = state.postsList.map((post) =>
-                post.id === action.payload.id ? action.payload : post
-            );
-        },
+        // updatePostInList: (state, action) => {
+        //     state.postsList = state.postsList.map((post) =>
+        //         post.id === action.payload.id ? action.payload : post
+        //     );
+        // },
         setSelectedPost: (state, action) => {
             state.selectedPost = action.payload;
         },
@@ -91,6 +128,31 @@ const postsSlice = createSlice({
                 state.postsList.push(action.payload);
             })
             .addCase(addPostToServer.rejected, (state, action) => {
+                state.error = action.payload.error;
+                state.isLoading = false;
+            })
+            .addCase(updatePostInServer.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(updatePostInServer.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.error = "";
+                state.postsList = state.postsList.map((post) =>
+                    post.id === action.payload.id ? action.payload : post
+                );
+            })
+            .addCase(updatePostInServer.rejected, (state, action) => {
+                state.error = action.payload.error;
+                state.isLoading = false;
+            })
+            .addCase(deletePostFromServer.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(deletePostFromServer.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.error = "";
+            })
+            .addCase(deletePostFromServer.rejected, (state, action) => {
                 state.error = action.payload.error;
                 state.isLoading = false;
             });
