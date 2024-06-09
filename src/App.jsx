@@ -1,5 +1,5 @@
 import "./index.css";
-import { AddPost } from "./components/AddTask";
+import { AddPost } from "./components/AddPost";
 import { Navbar } from "./components/Navbar";
 import PostList from "./components/PostList";
 
