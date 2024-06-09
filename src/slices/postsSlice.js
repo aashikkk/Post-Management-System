@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
-    postsList: JSON.parse(localStorage.getItem("posts")) || [],
+    postsList: [],
     selectedPost: {},
     isLoading: false,
     error: "",
